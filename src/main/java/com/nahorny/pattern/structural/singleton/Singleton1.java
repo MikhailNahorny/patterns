@@ -16,6 +16,7 @@ public final class Singleton1 {
     public static Singleton1 getSingleton() {
         return instance = (instance == null) ? new Singleton1() : instance;
     }
+
 }
 
 

@@ -3,7 +3,7 @@
  * ленивый, создает экземпляр по первому запросу
  */
 
-package com.nahorny.pattern.structural.singleton;
+package com.nahorny.pattern.creational.singleton;
 
 
 public final class Singleton1 {

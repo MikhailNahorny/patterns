@@ -2,7 +2,7 @@
  * потокобезопасный
  * нетерпеливый, создает экземпляр сразу
  */
-package com.nahorny.pattern.structural.singleton;
+package com.nahorny.pattern.creational.singleton;
 
 public final class Singleton2 {
     //field to save instance

@@ -28,5 +28,18 @@ public class Client {
             System.out.println(bicycleIterator.next());
         }
         System.out.println();
+
+        TreeContainer treeContainer = new TreeContainer();
+        for (int i = 0; i < 10; i++) {
+            int toAdd = (int) (Math.random() * 100 * Math.sin(i));
+            treeContainer.add(toAdd);
+        }
+        //iterator usage for binary tree based collection
+        Iterator treeIterator = treeContainer.getIterator();
+        System.out.print("given binary tree collection contains following random numbers: ");
+        while (treeIterator.hasNext()) {
+            System.out.print(treeIterator.next() + ", ");
+        }
+        System.out.println("\b\b\n");
     }
 }

@@ -15,5 +15,18 @@ public class Client {
             System.out.print(catIterator.next() + ", ");
         }
         System.out.println("\b\b\n");
+
+        Bicycle bicycle = new Bicycle("MTB");
+        bicycle.addPart("frame", 2000, 1.8f);
+        bicycle.addPart("fork", 5000, 1.6f);
+        bicycle.addPart("wheelSet", 4000, 2.8f);
+        bicycle.addPart("seat", 100, 0.3f);
+        //iterator usage for linked list based collection
+        Iterator bicycleIterator = bicycle.getIterator();
+        System.out.println("an " + bicycle.getType() + "-bicycle consist of:");
+        while (bicycleIterator.hasNext()) {
+            System.out.println(bicycleIterator.next());
+        }
+        System.out.println();
     }
 }

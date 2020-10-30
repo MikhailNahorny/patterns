@@ -1,0 +1,8 @@
+здесь рассмотренны основные шаблоны проектирования на языке Java
+
+полезные ссылки по теме:
+https://en.wikipedia.org/wiki/Software_design_pattern
+https://refactoring.guru/ru/design-patterns/what-is-pattern
+http://www.javenue.info/post/design-patterns-java
+
+отдельное спасибо Евгению Сулейманову https://www.youtube.com/channel/UCj7PgzcJ5yZfspMzxUUYcIA

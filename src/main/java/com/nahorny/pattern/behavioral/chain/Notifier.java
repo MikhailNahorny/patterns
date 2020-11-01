@@ -1,4 +1,4 @@
-package com.nahorny.pattern.behavioral.chainofresponsibility;
+package com.nahorny.pattern.behavioral.chain;
 
 public abstract class Notifier {
     private int priority;

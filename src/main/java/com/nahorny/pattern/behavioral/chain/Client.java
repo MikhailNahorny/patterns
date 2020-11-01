@@ -3,7 +3,7 @@
  * передача запроса по цепочке
  */
 
-package com.nahorny.pattern.behavioral.chainofresponsibility;
+package com.nahorny.pattern.behavioral.chain;
 
 public class Client {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.nahorny.pattern.behavioral.chainofresponsibility;
+package com.nahorny.pattern.behavioral.chain;
 
 public class LowPriorityHandler extends Notifier {
 

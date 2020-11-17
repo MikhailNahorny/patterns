@@ -1,12 +1,11 @@
-/**
- * способ от товарища Joshua Bloch’а
- * <p>
- * К Enum можно применять методы:
- * name(), ordinal(), equals(), hashCode(), toString(), finalize(), clone(), values(), valueOf()
- * реализовывает интерфейс Comparable, Serializable
- * с В.5 появился абстрактный класс Enum
- *
- * если в enum добавить коестант, то получим мультитон
+/*
+  способ от товарища Joshua Bloch’а
+  К Enum можно применять методы:
+  name(), ordinal(), equals(), hashCode(), toString(), finalize(), clone(), values(), valueOf()
+  реализовывает интерфейс Comparable, Serializable
+  с В.5 появился абстрактный класс Enum
+
+  если в enum добавить коестант, то получим мультитон
  */
 
 package com.nahorny.pattern.creational.singleton;
@@ -18,8 +17,7 @@ public class Singleton6 {
         private String name;
 
         /**
-         * конструктор для константы
-         *
+         * конструктор для константы перечисления
          */
         Singleton(int i, String name) {
             this.value = i;

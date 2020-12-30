@@ -6,3 +6,6 @@ https://refactoring.guru/ru/design-patterns/what-is-pattern
 http://www.javenue.info/post/design-patterns-java
 
 отдельное спасибо Евгению Сулейманову https://www.youtube.com/channel/UCj7PgzcJ5yZfspMzxUUYcIA
+
+
+*во всех шаблонах есть ошибка оформления: коменты должны быть не javadoc, а построчные или блоком

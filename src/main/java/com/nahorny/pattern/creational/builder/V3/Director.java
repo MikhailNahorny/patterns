@@ -13,7 +13,6 @@ public class Director {
         builder.buildColor();
         builder.buildPrice();
 
-        Product product = builder.getProduct();
-        return product;
+        return builder.getProduct();
     }
 }

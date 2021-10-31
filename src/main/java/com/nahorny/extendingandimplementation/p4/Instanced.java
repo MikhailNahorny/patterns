@@ -1,7 +1,5 @@
 package com.nahorny.extendingandimplementation.p4;
 
-import org.w3c.dom.ls.LSOutput;
-
 class Instanced {
     public static void main(String[] args) {
         //ниже - "инстанция" абстрактного класса. по сути, это анонимная реализация

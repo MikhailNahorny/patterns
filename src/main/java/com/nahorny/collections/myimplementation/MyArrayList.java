@@ -398,7 +398,7 @@ public class MyArrayList implements List {
         if (this.currentSize == 0) {
             return "MyCollection is empty";
         }
-        String res = "MyCollection contains following items:\n";
+        String res = "";
         for (int i = 0; i < currentSize; i++) {
             res += this.payload[i].toString() + "\n";
         }

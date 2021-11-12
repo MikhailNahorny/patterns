@@ -1,5 +1,7 @@
 package com.nahorny.collections.myimplementation;
 
+import com.nahorny.collections.myimplementation.objectsexamples.Car;
+
 import java.util.List;
 import java.util.ListIterator;
 

@@ -1,4 +1,4 @@
-package com.nahorny.collections.myimplementation;
+package com.nahorny.collections.myimplementation.objectsexamples;
 
 import java.util.Comparator;
 

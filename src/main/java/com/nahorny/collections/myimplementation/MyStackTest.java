@@ -23,7 +23,7 @@ public class MyStackTest {
     }
 
     @Test
-    public void testAddSizeIsEmptyToString() {
+    public void testStack() {
         Assert.assertEquals(st.toString(), "[6, 5, 4, 3, 2, 1, 0]");
         Assert.assertEquals(st.peek(), 6);
         Assert.assertEquals(st.toString(), "[6, 5, 4, 3, 2, 1, 0]");

@@ -1,12 +1,13 @@
 package com.nahorny.collections.myimplementation;
 
+import java.util.EmptyStackException;
 import java.util.Objects;
 
-public class Stack {
+public class MyStack {
     private Node head, tail;
     private int size;
 
-    public Stack() {
+    public MyStack() {
     }
 
     public boolean push(Object o) {
@@ -27,13 +28,17 @@ public class Stack {
     public Object pop() {
         Node res = head;
         if (head != null) head = head.next;
-        else throw new IndexOutOfBoundsException("empty");
+        else throw new EmptyStackException();
         size--;
-        return res;
+        return res.payload;
     }
 
     public Object peek() {
-        return head;
+        return head.payload;
+    }
+
+    public boolean empty() {
+        return size == 0;
     }
 
     @Override

@@ -1,12 +1,15 @@
 package com.nahorny.cucumber;
 
 import com.nahorny.automationqa.Calculator;
+import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+
+import java.util.List;
 
 public class CalculatorSteps {
 
@@ -17,12 +20,12 @@ public class CalculatorSteps {
     double result;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         this.calc = new Calculator();
     }
 
     @After
-    public void cleanUp(){
+    public void cleanUp() {
         this.calc = null;
     }
 
@@ -81,6 +84,10 @@ public class CalculatorSteps {
         Assert.assertEquals(-res, result, 0.0001);
     }
 
-
-
+    @When("^just example of DataTable $")
+    public void enterData(DataTable table) {
+        //Initialize data table
+        List<List<String>> data = table.raw();
+        System.out.println(data.get(1).get(1));
+    }
 }

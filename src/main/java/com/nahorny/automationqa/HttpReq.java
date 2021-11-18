@@ -1,4 +1,11 @@
 package com.nahorny.automationqa;
+/**
+ * see https://stackoverflow.com/questions/1322335/what-is-the-best-java-library-to-use-for-http-post-get-etc
+ *
+ * https://www.twilio.com/blog/5-ways-to-make-http-requests-in-java
+ * https://www.baeldung.com/java-http-request
+ * https://stackoverflow.com/questions/1359689/how-to-send-http-request-in-java
+ */
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

@@ -1,4 +1,4 @@
-package com.nahorny.automationqa;
+package com.nahorny.automationqa.rest;
 
 /**
  * used for Cucumber usage example

@@ -1,4 +1,4 @@
-package com.nahorny.automationqa;
+package com.nahorny.automationqa.rest;
 
 import java.util.HashMap;
 import java.util.Map;

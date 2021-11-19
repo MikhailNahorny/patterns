@@ -1,4 +1,4 @@
-package com.nahorny.automationqa;
+package com.nahorny.automationqa.rest;
 /**
  * see https://stackoverflow.com/questions/1322335/what-is-the-best-java-library-to-use-for-http-post-get-etc
  *

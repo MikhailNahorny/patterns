@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-public class Cliker {
+public class Clicker {
     WebDriver driver = WebDriverManager.getDriver();
 
     WebElement we = driver.findElement(By.xpath("//example"));

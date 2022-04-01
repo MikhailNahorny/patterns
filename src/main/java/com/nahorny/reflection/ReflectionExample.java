@@ -1,4 +1,8 @@
-package com.nahorny.main;
+package com.nahorny.reflection;
+
+/*
+Breaking singleton by reflection api
+ */
 
 import com.nahorny.pattern.creational.singleton.Singleton1;
 

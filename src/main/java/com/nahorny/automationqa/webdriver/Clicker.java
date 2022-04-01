@@ -13,15 +13,15 @@ public class Clicker {
     WebElement we = driver.findElement(By.xpath("//example"));
     WebElement we2 = (WebElement) ((JavascriptExecutor) driver).executeScript("return document.querySelector('selector')");
 
-    public void clickSelenium() {
+    public void clickSelenium(WebElement we) {
         we.click();
     }
 
-    public void clickJS() {
+    public void clickJS(WebElement we) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", we);
     }
 
-    public void clickActions() {
+    public void clickActions(WebElement we) {
         Actions act = new Actions(driver);
         act.click(we).build().perform();
         act.moveToElement(we).click().build().perform();

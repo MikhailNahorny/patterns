@@ -2,15 +2,30 @@ package com.nahorny.threads.callable.ex2;
 
 import com.nahorny.automationqa.utils.Dates;
 import com.nahorny.collections.myimplementation.Logger;
+import com.nahorny.pattern.behavioral.mediator.Carpenter;
+import javafx.util.Callback;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.TreeSet;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Exchanger;
@@ -41,7 +56,8 @@ public class MyCall implements Callable {
         return Thread.currentThread().getName() + Dates.now().timeStamp("_yyyy.MM.dd_HH.mm.ss:SSS");
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[])
+            throws BrokenBarrierException, ExecutionException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ExecutorService es = Executors.newFixedThreadPool(10);
         List<Future<String>> list = new ArrayList<>();
         Callable<String> callable = new MyCall();
@@ -67,9 +83,11 @@ public class MyCall implements Callable {
         //                .thenAccept(System.out::println);
 
         es.shutdown();
+        method();
     }
 
-    void method() throws InterruptedException, ExecutionException, BrokenBarrierException {
+    static void method()
+            throws InterruptedException, ExecutionException, BrokenBarrierException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ThreadLocal<Integer> ti = ThreadLocal.withInitial(() -> 1);
         System.out.println(ti.get());
         Thread t = new Thread();
@@ -119,6 +137,7 @@ public class MyCall implements Callable {
         cb.await();
 
         Phaser p = new Phaser(3);
+        p.register();
         p.arriveAndAwaitAdvance();
 
         BlockingQueue<String> bq = new PriorityBlockingQueue<>();
@@ -145,9 +164,65 @@ public class MyCall implements Callable {
         ThreadLocalRandom.current().nextInt(); //instead Math.random() for threads
         TimeUnit.HOURS.toMillis(3);
         TimeUnit.SECONDS.sleep(2);
+
+        Class cc = Class.forName("Carpenter");
+        Carpenter ccc = (Carpenter) cc.newInstance();
+
+        javafx.util.Callback<String, String> cb2 = new Callback<String, String>() {
+
+            @Override public String call(String param) {
+                return null;
+            }
+        };
+        cb2.call("param");
+
+        System.gc();
+        Runtime.getRuntime().gc();
+        Object o = new Object();
+        //o.finalize(); protected
+
+        SoftReference<String> softRef = new SoftReference<>(new String("stringValue"));
+        softRef.get();
+        PhantomReference<String> phRef = new PhantomReference<String>(new String("fdd"), new ReferenceQueue<String>());
+        PhantomReference<String> phRef2 = new PhantomReference<String>(new String("fdd"), null);
+
+        WeakReference<String> weekRef = new WeakReference<>("string");
+        weekRef.get();
+
+        //        new Task("").scheduledExecutionTime();
+        TimerTask tt = new TimerTask() {
+
+            @Override public void run() {
+                System.out.println("do actions");
+            }
+        };
+        tt.scheduledExecutionTime();
+
+        Timer timer = new Timer("MyTimer");
+        timer.scheduleAtFixedRate(tt, 2, 2);
+
+        ConcurrentHashMap<String, String> chm = new ConcurrentHashMap<>();
+        chm.values();
+        chm.get("dfs");
+        chm.keys();
+
+        Hashtable ht = new Hashtable();
+        ht.keys();
+
+        Iterator it = new Iterator() {
+
+            @Override public boolean hasNext() {
+                return false;
+            }
+
+            @Override public Object next() {
+                return null;
+            }
+        };
     }
 
     static class MyTask extends RecursiveTask<Integer> {
+
         int operationsCount;
 
         public MyTask(int operationsCount) {
@@ -158,4 +233,25 @@ public class MyCall implements Callable {
             return 0;
         }
     }
+
+    //    static class Task extends TimerTask {
+    //        private String name;
+    //        public Task(String name) {
+    //            this.name = name;
+    //        }
+    //        public void run() {
+    //            System.out.println("[" + new Date() + "] " + name + ": task executed!");
+    //        }
+    //    }
+
+    void method3() {
+        LinkedList<String> l = new LinkedList<>();
+        l.pop();
+//        Set h = new HashSet();
+        Set h = new TreeSet();
+        Callable<String> c = () -> {return "null";};
+        Callback<String, String> cb = s -> s + "res";
+
+    }
+
 }

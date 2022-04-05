@@ -4,14 +4,34 @@ import com.nahorny.automationqa.utils.Dates;
 import com.nahorny.collections.myimplementation.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Exchanger;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.Phaser;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MyCall implements Callable {
 
@@ -26,7 +46,7 @@ public class MyCall implements Callable {
         List<Future<String>> list = new ArrayList<>();
         Callable<String> callable = new MyCall();
 
-//        es.execute(MyCall::new);
+        //        es.execute(MyCall::new);
 
         for (int i = 0; i < 100; i++) {
             Future<String> future = es.submit(callable);
@@ -39,13 +59,103 @@ public class MyCall implements Callable {
             } catch (InterruptedException | ExecutionException ignored) {
             }
         }
-//        CompletableFuture
-//                .supplyAsync(() -> {
-//                    return 50;
-//                })
-//                .thenApply(x -> x * 2)
-//                .thenAccept(System.out::println);
+        //        CompletableFuture
+        //                .supplyAsync(() -> {
+        //                    return 50;
+        //                })
+        //                .thenApply(x -> x * 2)
+        //                .thenAccept(System.out::println);
 
         es.shutdown();
+    }
+
+    void method() throws InterruptedException, ExecutionException, BrokenBarrierException {
+        ThreadLocal<Integer> ti = ThreadLocal.withInitial(() -> 1);
+        System.out.println(ti.get());
+        Thread t = new Thread();
+        t.setName("dsdsda");
+        t.setDaemon(true);
+
+        AtomicInteger ai = new AtomicInteger(0);
+        ai.get();
+
+        List l = Collections.synchronizedList(new ArrayList<>());
+        Map l2 = Collections.synchronizedMap(new HashMap<>());
+
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        //synchronized code
+        lock.unlock();
+        lock.tryLock();
+
+        Condition c = lock.newCondition();
+        c.await();
+        c.signal();
+
+        FutureTask ft = new FutureTask(MyCall::new);
+        new Thread(ft).start();
+        ft.get();
+
+        ExecutorService es = Executors.newFixedThreadPool(10);
+        es.execute(MyCall::new);
+
+        ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+        ses.schedule(new Thread(MyCall::new), 5, TimeUnit.SECONDS);
+        ses.shutdown();
+
+        Semaphore sem = new Semaphore(2);
+        sem.acquire();
+        sem.release();
+
+        CountDownLatch countDownLatch = new CountDownLatch(3);
+        countDownLatch.await();
+        countDownLatch.countDown();
+
+        Exchanger<String> ex = new Exchanger<>();
+        ex.exchange("to transmit");
+        String toReceive = ex.exchange(null);
+
+        CyclicBarrier cb = new CyclicBarrier(3, MyCall::new);
+        cb.await();
+
+        Phaser p = new Phaser(3);
+        p.arriveAndAwaitAdvance();
+
+        BlockingQueue<String> bq = new PriorityBlockingQueue<>();
+        bq.take();
+        bq.add("string");
+
+        ThreadFactory f = new ThreadFactory() {
+
+            @Override public Thread newThread(Runnable r) {
+                Thread t = new Thread(r);
+                t.setName("");
+                t.setPriority(Thread.MAX_PRIORITY);
+                return t;
+            }
+        };
+        f.newThread(MyCall::new).start();
+        f.newThread(MyCall::new).start();
+
+        int threadCount = Runtime.getRuntime().availableProcessors();
+        int operationsCount = 1_000_000;
+        ForkJoinPool fp = new ForkJoinPool(threadCount);
+        fp.invoke(new MyTask(operationsCount));
+
+        ThreadLocalRandom.current().nextInt(); //instead Math.random() for threads
+        TimeUnit.HOURS.toMillis(3);
+        TimeUnit.SECONDS.sleep(2);
+    }
+
+    static class MyTask extends RecursiveTask<Integer> {
+        int operationsCount;
+
+        public MyTask(int operationsCount) {
+            this.operationsCount = operationsCount;
+        }
+
+        @Override protected Integer compute() {
+            return 0;
+        }
     }
 }
